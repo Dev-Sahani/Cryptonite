@@ -28,9 +28,7 @@ export default function WatchList() {
     return (
       <div className="w-full">
         <h1 className="text-left text-xl font-semibold">Your Watchlist</h1>
-        <p className="w-full text-center text-lg">
-          You don't have any currency in watch-list.
-        </p>
+        <p className="w-full text-center text-lg">Your Watch list is empty.</p>
       </div>
     );
   }

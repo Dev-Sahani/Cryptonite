@@ -14,9 +14,9 @@ import { useQuerySetClientSide } from "@/hooks/useQuerySetClientSide";
 
 export default function SearchCryptos() {
   return (
-    <div className="py-10 flex flex-col gap-12">
-      <div className="px-8 py-12 bg-primary text-background flex justify-between items-center gap-6 font-medium relative">
-        <IoSearchSharp className="w-12 h-12" />
+    <div className="py-4 sm:py-6 md:py-10 flex flex-col gap-6 sm:gap-12">
+      <div className="px-4 md:px-8 py-6 sm:py-8 md:py-12 bg-primary text-background flex justify-between items-center gap-6 font-medium relative">
+        <IoSearchSharp className="w-8 h-8 md:w-12 md:h-12" />
         <SearchInput />
         <SearchSelect />
       </div>
@@ -46,7 +46,7 @@ function SearchInput() {
       value={localSearchVal}
       onChange={(e) => optimizedDebounce(e.target.value)}
       placeholder="type... (Coin Gecko API only works if you type full name bitcoin or ethereum etc."
-      className="py-1.5 px-2 outline-none focus-visible:remove-outline-input rounded-none text-primary text-lg"
+      className="py-1.5 px-2 outline-none focus-visible:remove-outline-input rounded-none text-primary text-base md:text-lg"
     />
   );
 }
