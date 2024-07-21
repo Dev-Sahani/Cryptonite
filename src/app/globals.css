@@ -70,6 +70,9 @@
   display: none;
 }
 
+.special-btn {
+  background-color: hsl(var(--primary));
+}
 .special-btn::before {
   background: linear-gradient(90deg, #03a9f4, #f441a5);
   filter: blur(1.2em);
