@@ -39,15 +39,22 @@ export async function getAllCoinsData({
   category,
   order = "market_cap_desc",
 }: SearchParamsExplorePage): Promise<AllCoinsData> {
-  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&per_page=20&page=${
-    page || 1
-  }`;
+  // ids can contain multiple values separated by '%2'
+  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr${
+    ids ? `&ids=${ids}` : ""
+  }${
+    category && category !== "none" ? `&category=${category}` : ""
+  }&per_page=25&page=${page || 1}`;
+
+  console.log(url);
+
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
       "x-cg-demo-api-key": process.env.COIN_GECKO_KEY || "",
     },
+    next: { revalidate: 0 },
   };
 
   const result = await fetch(url, options)

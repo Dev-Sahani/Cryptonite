@@ -14,7 +14,7 @@ export function useQuerySetClientSide(query: string, defaultValue: string) {
     const params = new URLSearchParams(searchParams);
     params.set(query, queryVal);
     router.push(`${pathname}?${params.toString()}`);
-  }, [[query, queryVal, searchParams, pathname, router]]);
+  }, [[query, queryVal]]);
 
   return [queryVal, setQueryVal] as [string, typeof setQueryVal];
 }

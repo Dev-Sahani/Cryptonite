@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .remove-outline-input {
+    --tw-ring-offset-width: 0px;
+  }
+}
+
 @layer base {
   :root {
     --highlight: #d5e43c;
@@ -88,6 +94,11 @@
 
 .pagination-btn:hover .pagination-btn-arrow {
   animation: slide-in-left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.mirror-image {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 @keyframes slide-in-left {
