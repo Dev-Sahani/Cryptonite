@@ -37,10 +37,11 @@ async function TableComponent({ companiesData, coin }: TableProps) {
       <TableCaption>A list of your companies holding {coin}</TableCaption>
       <TableHeader className="bg-secondary font-semibold">
         <TableRow>
-          <TableHead className="pl-8 text-primary text-left hidden lg:table-cell">
+          <TableHead></TableHead>
+          <TableHead className="text-primary text-left hidden lg:table-cell">
             Symbol
           </TableHead>
-          <TableHead className="pl-8 text-primary text-left pl-8 lg:text-center lg:pl-0">
+          <TableHead className="text-primary text-left lg:text-center">
             Name
           </TableHead>
           <TableHead className="pl-8 text-primary text-center">
@@ -60,16 +61,18 @@ async function TableComponent({ companiesData, coin }: TableProps) {
       <TableBody>
         {companiesData.companies.map((company, index) => (
           <TableRow key={company.symbol} className="relative">
-            <TableCell className="pl-8 text-base text-left hidden lg:table-cell">
-              {company.symbol.split(":")[1]}
-            </TableCell>
-            <TableCell className="text-left pl-8 lg:text-center lg:pl-0">
+            <TableCell className="max-w-8 p-0 pl-2">
               <div
                 className={cn(
-                  "h-5 w-5 absolute-dot rounded-full",
+                  "h-5 w-5 rounded-full",
                   index % 2 ? "bg-secondary" : "bg-highlight"
                 )}
               ></div>
+            </TableCell>
+            <TableCell className="text-base text-left hidden lg:table-cell">
+              {company.symbol.split(":")[1]}
+            </TableCell>
+            <TableCell className="text-left lg:text-center">
               {company.name}
             </TableCell>
             <TableCell>{company.total_holdings}$</TableCell>
