@@ -27,8 +27,21 @@ export type AllCoinsData = {
   last_updated: Date | string;
 }[];
 
-export async function getAllCoinsData(): Promise<AllCoinsData> {
-  const url = "https://api.coingecko.com/api/v3/coins/markets";
+export type SearchParamsExplorePage = {
+  page: string | null;
+  ids: string | null;
+  category: string | null;
+  order: "market_cap_asc" | "market_cap_desc" | "ids_asc" | "ids_desc" | null;
+};
+export async function getAllCoinsData({
+  ids,
+  page = "1",
+  category,
+  order = "market_cap_desc",
+}: SearchParamsExplorePage): Promise<AllCoinsData> {
+  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&per_page=20&page=${
+    page || 1
+  }`;
   const options = {
     method: "GET",
     headers: {
@@ -37,5 +50,18 @@ export async function getAllCoinsData(): Promise<AllCoinsData> {
     },
   };
 
-  return await fetch(url, options).then((res) => res.json());
+  const result = await fetch(url, options)
+    .then((res) => {
+      if (res.status != 200) {
+        throw new Error(res.statusText || "Something went wong");
+      }
+      return res;
+    })
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err.message);
+      return [];
+    });
+
+  return result;
 }

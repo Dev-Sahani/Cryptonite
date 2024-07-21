@@ -59,12 +59,51 @@
     --chart-5: 340 75% 55%;
   }
 }
+.pagination-btn {
+  width: 120px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  border: 5px solid hsl(var(--primary));
+  background-color: hsl(var(--primary));
+}
 
-.absolute-dot {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 1px;
+.pagination-btn-text {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(var(--background));
+  color: hsl(var(--primary));
+  @apply font-medium;
+}
+
+.pagination-btn-arrow path {
+  fill: hsl(var(--background));
+}
+
+.pagination-btn:hover .pagination-btn-arrow {
+  animation: slide-in-left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-8px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+.button:active {
+  transform: scale(0.97);
 }
 
 @layer base {
