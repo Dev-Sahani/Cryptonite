@@ -14,7 +14,7 @@ export function SelectCoins() {
 
   return (
     <Select defaultValue={coin} onValueChange={(value) => setCoin(value)}>
-      <SelectTrigger className="w-72 bg-primary text-secondary text-lg text-center capitalize rounded-none">
+      <SelectTrigger className="w-52 sm:w-72 bg-primary text-secondary text-base sm:text-lg text-center capitalize rounded-none">
         <SelectValue placeholder="Select a Coin" />
       </SelectTrigger>
       <SelectContent>
@@ -23,7 +23,7 @@ export function SelectCoins() {
             <SelectItem
               value={option}
               key={option}
-              className="text-xl capitalize"
+              className="text-base sm:text-xl capitalize"
             >
               {option}
             </SelectItem>

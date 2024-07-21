@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -11,6 +13,7 @@ import Image from "next/image";
 import { AllCoinsData } from "@/api/explore";
 import { entriesToShowForCoinsTable } from "@/utils/constants";
 import { formatNumber } from "@/utils/typeConversion";
+import { redirect } from "next/navigation";
 
 export function TableComponent({ coinsData }: { coinsData: AllCoinsData }) {
   return (
@@ -40,6 +43,10 @@ export function TableComponent({ coinsData }: { coinsData: AllCoinsData }) {
               "py-0 hover:cursor-pointer",
               index === coinsData.length - 1 && "border-b border-secondary"
             )}
+            onClick={() => {
+              console.log("redirecting", coin.id);
+              redirect(`/product/${coin.id}`);
+            }}
           >
             <TableCell className="w-16 h-8 xl:w-20 xl:h-12 p-0 xl:p-4 relative">
               {coin.image && (

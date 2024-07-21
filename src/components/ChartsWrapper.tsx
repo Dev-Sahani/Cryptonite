@@ -11,12 +11,14 @@ type ChartsWrapperProps<T> = {
   heading?: string;
   data: T;
   lineKeys: Array<string>;
+  className?: string;
 };
 
 export default function ChartsWrapper<T extends Array<object>>({
   heading = "Analysis",
   data,
   lineKeys,
+  className
 }: ChartsWrapperProps<T>) {
   const [interval, setInterval] = useQuerySetClientSide(
     "interval",
@@ -24,7 +26,7 @@ export default function ChartsWrapper<T extends Array<object>>({
   );
 
   return (
-    <div>
+    <div className={className}>
       <Header heading={heading} />
       <main className="pt-4 pb-1 border-2 border-secondary">
         {interval === "max" ? (
@@ -57,12 +59,12 @@ function Header({ heading }: { heading: string }) {
   );
 
   return (
-    <header className="w-full flex flex-col gap-2 text-xl">
+    <header className="w-full flex flex-col gap-2 text-lg sm:text-xl">
       <div className="w-full py-2 flex justify-between items-center">
-        <h3 className="text-2xl font-medium">{heading}</h3>
+        <h3 className="text-lg sm:text-2xl font-medium">{heading}</h3>
         <SelectCoins />
       </div>
-      <div className="px-2 py-1 w-full flex justify-between items-center gap-4 bg-secondary text-lg">
+      <div className="px-2 py-1 w-full flex justify-between items-center gap-4 bg-secondary text-base sm:text-lg">
         <div className="flex gap-4 font-medium">
           <p>$149.86</p>
           <p className="text-green-500">0.919%</p>
