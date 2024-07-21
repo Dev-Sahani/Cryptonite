@@ -70,6 +70,11 @@
   display: none;
 }
 
+.special-btn::before {
+  background: linear-gradient(90deg, #03a9f4, #f441a5);
+  filter: blur(1.2em);
+}
+
 .pagination-btn {
   width: 120px;
   height: 30px;

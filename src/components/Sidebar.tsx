@@ -88,6 +88,6 @@ const sidebarList = [
   {
     title: "Profile",
     icon: <CgProfile className="w-6 h-6" />,
-    to: "/profile",
+    to: "/",
   },
 ];
