@@ -1,5 +1,5 @@
 "use client";
-import { useQuerySetClientSide } from "@/hooks/useQuerySetClientSide";
+import { useQueryUpdate } from "@/hooks/useQueryUpdate";
 import { colors, defaultCoin } from "@/utils/constants";
 import {
   LineChart,
@@ -21,7 +21,7 @@ export default function LineCharts<T extends Array<Object>>({
   data,
   lineKeys,
 }: Props<T>) {
-  const [coin, setCoin] = useQuerySetClientSide("coin", defaultCoin);
+  const [coin, setCoin] = useQueryUpdate("coin", defaultCoin);
 
   return (
     <div className="w-full h-96">

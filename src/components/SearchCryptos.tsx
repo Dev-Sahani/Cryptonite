@@ -1,6 +1,5 @@
 "use client";
 import { Category, getAllCategories } from "@/actions/SearchBarInfo";
-import { useState, useMemo, useEffect } from "react";
 import {
   Select,
   SelectContent,
@@ -10,7 +9,9 @@ import {
 } from "@/components/ui/select";
 import { Input } from "./ui/input";
 import { IoSearchSharp } from "react-icons/io5";
-import { useQuerySetClientSide } from "@/hooks/useQuerySetClientSide";
+import { useQueryUpdate } from "@/hooks/useQueryUpdate";
+import useInitialDataFetching from "@/hooks/useInitialDataFetching";
+import { useDebounceQueryUpdate } from "@/hooks/useDebounceQueryUpdate";
 
 export default function SearchCryptos() {
   return (
@@ -25,26 +26,12 @@ export default function SearchCryptos() {
 }
 
 function SearchInput() {
-  const [searchVal, setSearchVal] = useQuerySetClientSide("ids", "");
-  const [localSearchVal, setLocalSearchVal] = useState("");
-
-  const debounce = () => {
-    let timeOutId: NodeJS.Timeout | undefined;
-    return (newValue: string) => {
-      setLocalSearchVal(newValue);
-      clearTimeout(timeOutId);
-      timeOutId = setTimeout(() => {
-        setSearchVal(newValue);
-      }, 1000);
-    };
-  };
-
-  const optimizedDebounce = useMemo(() => debounce(), []);
+  const [searchVal, setSearchVal] = useDebounceQueryUpdate("ids", "");
 
   return (
     <Input
-      value={localSearchVal}
-      onChange={(e) => optimizedDebounce(e.target.value)}
+      value={searchVal}
+      onChange={(e) => setSearchVal(e.target.value)}
       placeholder="type... (Coin Gecko API only works if you type full name bitcoin or ethereum etc."
       className="py-1.5 px-2 outline-none focus-visible:remove-outline-input rounded-none text-primary text-base md:text-lg"
     />
@@ -52,19 +39,11 @@ function SearchInput() {
 }
 
 function SearchSelect() {
-  const [categories, setCategory] = useState<Category[]>([]);
-  const [loading, setloading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [categoryVal, setCategoryVal] = useQuerySetClientSide("category", "");
-
-  useEffect(() => {
-    getAllCategories()
-      .then((res) => {
-        setCategory(res);
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setloading(false));
-  }, []);
+  const [categoryVal, setCategoryVal] = useQueryUpdate("category", "");
+  const [categories, loading, error] = useInitialDataFetching(
+    [],
+    getAllCategories
+  );
 
   if (error) {
     return <div className="py-2 px-4 bg-rend-400 text-primary">{error}</div>;
@@ -80,17 +59,18 @@ function SearchSelect() {
         <SelectValue placeholder="Select a Category" />
       </SelectTrigger>
       <SelectContent>
-        {!loading && <SelectItem value="none">None</SelectItem>}
         {loading ? (
           <div>Loading...</div>
         ) : (
-          categories.slice(0, 10).map((category) => (
-            <SelectItem value={category.id} key={category.id}>
-              {category.name}
-            </SelectItem>
-          ))
+          <>
+            <SelectItem value="none">None</SelectItem>
+            {categories.slice(0, 10).map((category) => (
+              <SelectItem value={category.id} key={category.id}>
+                {category.name}
+              </SelectItem>
+            ))}
+          </>
         )}
-        {/* <SelectItem>{"Load More >>"}</SelectItem> */}
       </SelectContent>
     </Select>
   );

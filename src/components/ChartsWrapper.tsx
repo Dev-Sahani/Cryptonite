@@ -3,7 +3,7 @@
 import { ChartsTimeRanges, ChartsTimeRange } from "@/utils/constants";
 import { cn } from "@/utils/classNames";
 import LineCharts from "./LineCharts";
-import { useQuerySetClientSide } from "@/hooks/useQuerySetClientSide";
+import { useQueryUpdate } from "@/hooks/useQueryUpdate";
 import { SelectCoins } from "./SelectCoins";
 
 type ChartsWrapperProps<T> = {
@@ -19,7 +19,7 @@ export default function ChartsWrapper<T extends Array<object>>({
   lineKeys,
   className,
 }: ChartsWrapperProps<T>) {
-  const [interval, setInterval] = useQuerySetClientSide(
+  const [interval, setInterval] = useQueryUpdate(
     "interval",
     ChartsTimeRanges[0]
   );
@@ -52,7 +52,7 @@ export default function ChartsWrapper<T extends Array<object>>({
 }
 
 function Header({ heading }: { heading: string }) {
-  const [interval, setInterval] = useQuerySetClientSide(
+  const [interval, setInterval] = useQueryUpdate(
     "interval",
     ChartsTimeRanges[0]
   );

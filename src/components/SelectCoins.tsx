@@ -6,11 +6,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useQuerySetClientSide } from "@/hooks/useQuerySetClientSide";
+import { useQueryUpdate } from "@/hooks/useQueryUpdate";
 import { defaultCoin, CoinsToShowAtMarketCapSection } from "@/utils/constants";
 
 export function SelectCoins() {
-  const [coin, setCoin] = useQuerySetClientSide("coin", defaultCoin);
+  const [coin, setCoin] = useQueryUpdate("coin", defaultCoin);
 
   return (
     <Select defaultValue={coin} onValueChange={(value) => setCoin(value)}>

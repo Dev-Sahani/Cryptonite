@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export function useQuerySetClientSide(query: string, defaultValue: string) {
+export function useQueryUpdate(query: string, defaultValue: string) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
