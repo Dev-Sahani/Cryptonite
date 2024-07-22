@@ -5,7 +5,6 @@ import { cn } from "@/utils/classNames";
 import LineCharts from "./LineCharts";
 import { useQuerySetClientSide } from "@/hooks/useQuerySetClientSide";
 import { SelectCoins } from "./SelectCoins";
-import { useEffect } from "react";
 
 type ChartsWrapperProps<T> = {
   heading?: string;
@@ -18,7 +17,7 @@ export default function ChartsWrapper<T extends Array<object>>({
   heading = "Analysis",
   data,
   lineKeys,
-  className
+  className,
 }: ChartsWrapperProps<T>) {
   const [interval, setInterval] = useQuerySetClientSide(
     "interval",

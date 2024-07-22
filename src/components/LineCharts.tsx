@@ -10,6 +10,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { formatNumber } from "@/utils/typeConversion";
 
 type Props<T> = {
   data: T;
@@ -27,9 +28,17 @@ export default function LineCharts<T extends Array<Object>>({
       <ResponsiveContainer width="100%" height="100%">
         <LineChart width={500} height={300} data={data}>
           <CartesianGrid strokeDasharray="4 4" />
-          <XAxis dataKey="interval" />
-          <YAxis tickFormatter={DataFormater} domain={[]} />
-          <Tooltip />
+          <XAxis dataKey="0" />
+          <YAxis
+            tickFormatter={(value) => formatNumber(value, 1)}
+            domain={[]}
+          />
+          <Tooltip
+            formatter={(value: number, name: string) => [
+              formatNumber(value, 1),
+              name,
+            ]}
+          />
           {lineKeys.map((key, index) => (
             <Line
               name={coin}
@@ -44,15 +53,3 @@ export default function LineCharts<T extends Array<Object>>({
     </div>
   );
 }
-
-const DataFormater = (num: number) => {
-  if (num > 1000000000) {
-    return Math.floor(num / 1000000000).toString() + "B";
-  } else if (num > 1000000) {
-    return Math.floor(num / 1000000).toString() + "M";
-  } else if (num > 1000) {
-    return Math.floor(num / 1000).toString() + "K";
-  } else {
-    return num.toString();
-  }
-};
