@@ -27,8 +27,11 @@ type TableProps = {
 
 async function NewsCard({ companiesData, coin }: TableProps) {
   return (
-    <div className="shadow-lg">
-      <img src="" alt="news image" className="h-24 w-48 bg-scondary" />
+    <div className="p-4 bg-secondary">
+      {/* <img src="" alt="news image" className="h-24 w-48 bg-scondary" /> */}
+      <h3 className="w-full min-w-20 md:min-w-40 h-24 bg-secondary text-primary font-medium text-xl text-center mt-12">
+        News
+      </h3>
       <h2 className="text-lg font-semibold">News heading</h2>
       <p className="text-justify w-32 min-h-16">News article....</p>
     </div>

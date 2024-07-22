@@ -25,7 +25,7 @@ export async function getAllCategories(): Promise<Category[]> {
   return await fetch(url, options).then((res) => {
     if (res.status !== 200) {
       console.log(res.statusText);
-      throw new Error(res.statusText);
+      return [];
     }
     return res.json();
   });
