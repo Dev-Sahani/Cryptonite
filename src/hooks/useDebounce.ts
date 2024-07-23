@@ -21,7 +21,37 @@ export function useDebounce<T>(
   return [state, debounce] as [T, (value: T) => void];
 }
 
-const topCoins = [
+const coin = {
+  id: "bitcoin",
+  symbol: "btc",
+  name: "Bitcoin",
+  image:
+    "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+  current_price: 67163,
+  market_cap: 1326408927409,
+  market_cap_rank: 1,
+  fully_diluted_valuation: 1411839110281,
+  total_volume: 35115322472,
+  high_24h: 68480,
+  low_24h: 65884,
+  price_change_24h: 330.67,
+  price_change_percentage_24h: 0.49477,
+  market_cap_change_24h: 10083331036,
+  market_cap_change_percentage_24h: 0.76602,
+  circulating_supply: 19729293,
+  total_supply: 21000000,
+  max_supply: 21000000,
+  ath: 73738,
+  ath_change_percentage: -9.00772,
+  ath_date: "2024-03-14T07:10:36.635Z",
+  atl: 67.81,
+  atl_change_percentage: 98848.2703,
+  atl_date: "2013-07-06T00:00:00.000Z",
+  roi: null,
+  last_updated: "2024-07-22T14:09:16.238Z",
+};
+export type Coin = typeof coin;
+export const topCoins = [
   {
     id: "bitcoin",
     symbol: "btc",
@@ -610,4 +640,4 @@ const topCoins = [
     roi: null,
     last_updated: "2024-07-22T14:09:13.406Z",
   },
-];
+] as Coin[];

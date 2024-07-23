@@ -1,5 +1,5 @@
 "use client";
-import { Category, getAllCategories } from "@/actions/SearchBarInfo";
+import { getAllCategories } from "@/actions/SearchBarInfo";
 import {
   Select,
   SelectContent,
@@ -12,6 +12,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { useQueryUpdate } from "@/hooks/useQueryUpdate";
 import useInitialDataFetching from "@/hooks/useInitialDataFetching";
 import { useDebounceQueryUpdate } from "@/hooks/useDebounceQueryUpdate";
+// import AutoComplete from "./AutoComplete";
 
 export default function SearchCryptos() {
   return (
@@ -35,6 +36,10 @@ function SearchInput() {
       placeholder="type... (Coin Gecko API only works if you type full name bitcoin or ethereum etc."
       className="py-1.5 px-2 outline-none focus-visible:remove-outline-input rounded-none text-primary text-base md:text-lg"
     />
+    // <AutoComplete
+    //   data={["java", "javascript", "python", "C", "C++", "Rust"]}
+    //   formatResult={(value) => value}
+    // />
   );
 }
 
